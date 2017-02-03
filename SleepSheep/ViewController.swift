@@ -11,7 +11,7 @@ import SpriteKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet var label:UILabel!
+    @IBOutlet var label:SpringLabel!
     var number:Int = 0
     var gamescene = GameScene()
 
@@ -33,10 +33,14 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-        @IBAction func action() {
+    @IBAction func action() {
         gamescene.setupSheep()
         number = number + 1
         label.text = String(number)
+        
+        label.animation = "pop"
+        label.animate()
+            
     }
 }
 
