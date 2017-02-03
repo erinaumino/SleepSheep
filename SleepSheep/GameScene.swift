@@ -110,7 +110,7 @@ class GameScene: SKScene {
         
         // スプライトを作成
         sheep = SKSpriteNode(texture: birdTextureA)
-        sheep.position = CGPoint(x: 0, y:self.frame.size.height * 0.2)
+        sheep.position = CGPoint(x: 0, y: 160)
         
         // アニメーションを設定
         sheep.run(flap)
@@ -119,7 +119,7 @@ class GameScene: SKScene {
         addChild(sheep)
         
         //移動のアニメーションを設定
-        let action = SKAction.moveTo(x: 400, duration:3.0)
+        let action = SKAction.moveTo(x: 500, duration:3.0)
         sheep.run(action)
         
     }
