@@ -8,14 +8,40 @@
 
 import UIKit
 import SpriteKit
+import AudioToolbox
+import AVFoundation
 
-class GameScene: SKScene {
+class GameScene: SKScene, AVAudioPlayerDelegate{
+    
+    // この変数は実際のコードではUIViewControllerクラス内で宣言してる
+    var audioPlayer: AVAudioPlayer?
+    
+
     
     var scrollNode:SKNode!
     var sheep:SKSpriteNode!
 
     // SKView上にシーンが表示されたときに呼ばれるメソッド
     override func didMove(to view: SKView) {
+        
+        
+//         //サウンドデータの読み込み。ファイル名は"kane01"。拡張子は"mp3"
+//        let audioPath : String = Bundle.main.path(forResource: "sheep_cry", ofType: "mp3")!
+//        let fileURL : URL = URL(fileURLWithPath: audioPath)
+//        
+//        do{
+//            // AVAudioPlayerのインスタンス化
+//            audioPlayer = try AVAudioPlayer(contentsOf: fileURL as URL)
+//            
+//            // AVAudioPlayerのデリゲートをセット
+//            audioPlayer.delegate = self
+//            
+//            
+//        }
+//        catch{
+//        }
+
+        
         // 背景色を設定
         //backgroundColor = UIColor(colorLiteralRed: 0.15, green: 0.75, blue: 0.90, alpha: 1)
         
@@ -122,6 +148,17 @@ class GameScene: SKScene {
         let action = SKAction.moveTo(x: 500, duration:3.0)
         sheep.run(action)
         
+        //サウンドファイルを読み込む
+        //let url = Bundle.main.bundleURL.appendingPathCompone("●●●.mp3")
+        let url = NSURL(fileURLWithPath: Bundle.main.path(forResource: "sheep_cry", ofType: "mp3")!)
+        do{
+            try audioPlayer = AVAudioPlayer(contentsOf: url as URL)
+        }catch{
+            print("Error!")
+        }
+        
+        //音を再生する
+        audioPlayer?.play()
     }
 
 }
