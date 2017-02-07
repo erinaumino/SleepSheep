@@ -24,27 +24,6 @@ class GameScene: SKScene, AVAudioPlayerDelegate{
     // SKView上にシーンが表示されたときに呼ばれるメソッド
     override func didMove(to view: SKView) {
         
-        
-//         //サウンドデータの読み込み。ファイル名は"kane01"。拡張子は"mp3"
-//        let audioPath : String = Bundle.main.path(forResource: "sheep_cry", ofType: "mp3")!
-//        let fileURL : URL = URL(fileURLWithPath: audioPath)
-//        
-//        do{
-//            // AVAudioPlayerのインスタンス化
-//            audioPlayer = try AVAudioPlayer(contentsOf: fileURL as URL)
-//            
-//            // AVAudioPlayerのデリゲートをセット
-//            audioPlayer.delegate = self
-//            
-//            
-//        }
-//        catch{
-//        }
-
-        
-        // 背景色を設定
-        //backgroundColor = UIColor(colorLiteralRed: 0.15, green: 0.75, blue: 0.90, alpha: 1)
-        
         // スクロールするスプライトの親ノード
         scrollNode = SKNode()
         addChild(scrollNode)
@@ -124,19 +103,24 @@ class GameScene: SKScene, AVAudioPlayerDelegate{
     func setupSheep() {
         
         
-        // 鳥の画像を2種類読み込む
-        let birdTextureA = SKTexture(imageNamed: "sheep_a")
-        birdTextureA.filteringMode = SKTextureFilteringMode.linear
-        let birdTextureB = SKTexture(imageNamed: "sheep_b")
-        birdTextureB.filteringMode = SKTextureFilteringMode.linear
+        // 羊の画像を2種類読み込む
+        let sheepTexture1 = SKTexture(imageNamed: "sheep2")
+        sheepTexture1.filteringMode = SKTextureFilteringMode.linear
+        let sheepTexture2 = SKTexture(imageNamed: "sheep3")
+        sheepTexture2.filteringMode = SKTextureFilteringMode.linear
+        let sheepTexture3 = SKTexture(imageNamed: "sheep4")
+        sheepTexture3.filteringMode = SKTextureFilteringMode.linear
+        let sheepTexture4 = SKTexture(imageNamed: "sheep5")
+        sheepTexture4.filteringMode = SKTextureFilteringMode.linear
+
         
         // 2種類のテクスチャを交互に変更するアニメーションを作成
-        let texuresAnimation = SKAction.animate(with: [birdTextureA, birdTextureB], timePerFrame: 0.2)
+        let texuresAnimation = SKAction.animate(with: [sheepTexture1, sheepTexture2, sheepTexture3, sheepTexture4], timePerFrame: 0.15)
         let flap = SKAction.repeatForever(texuresAnimation)
         
         // スプライトを作成
-        sheep = SKSpriteNode(texture: birdTextureA)
-        sheep.position = CGPoint(x: 0, y: 160)
+        sheep = SKSpriteNode(texture: sheepTexture1)
+        sheep.position = CGPoint(x: 0, y: 165)
         
         // アニメーションを設定
         sheep.run(flap)
@@ -149,7 +133,6 @@ class GameScene: SKScene, AVAudioPlayerDelegate{
         sheep.run(action)
         
         //サウンドファイルを読み込む
-        //let url = Bundle.main.bundleURL.appendingPathCompone("●●●.mp3")
         let url = NSURL(fileURLWithPath: Bundle.main.path(forResource: "sheep_cry", ofType: "mp3")!)
         do{
             try audioPlayer = AVAudioPlayer(contentsOf: url as URL)
